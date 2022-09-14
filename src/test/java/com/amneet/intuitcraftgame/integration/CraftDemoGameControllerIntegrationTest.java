@@ -1,6 +1,7 @@
 package com.amneet.intuitcraftgame.integration;
 
 import org.json.JSONException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -40,7 +41,7 @@ public class CraftDemoGameControllerIntegrationTest {
 
         String expected = "Score entered for Amneet";
 
-        JSONAssert.assertEquals(expected, response.getBody(), false);
+        Assertions.assertEquals(expected, response.getBody());
     }
     
     private String createURLWithPort(String uri) {
