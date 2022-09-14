@@ -18,79 +18,52 @@ import com.amneet.intuitcraftgame.model.Player;
 import com.amneet.intuitcraftgame.service.GameService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+/**
+ * @author amneetkaursawhney
+ * Rest Controller 
+ */
 @RestController
 public class CraftDemoGameController {
 	
 	@Autowired
 	GameService gameService;
 	
+	//Add Player Score
 	@PostMapping("/storePlayerScore")
     public ResponseEntity<String> savePlayerDetails(@RequestBody Player player) {
         return new ResponseEntity<>(gameService.addGameScore(player), HttpStatus.OK);
     }
 
+	//Get List of All Players
     @GetMapping("/getAllPlayers")
     public ResponseEntity<List<Player>> getAllPlayer() {
         return new ResponseEntity<>(gameService.getAllPlayers(), HttpStatus.OK);
     }
 
+    //Get Player by Id
     @GetMapping("/getPlayerById/{id}")
     public ResponseEntity<String> getPlayerById(@PathVariable int id) {
         return new ResponseEntity<>(gameService.getPlayerById(id), HttpStatus.OK);
 
     }
     
-    @GetMapping("/getPlayerByName/{name}")
-    public ResponseEntity<Player> getPlayerByName(@PathVariable String name) {
-        return new ResponseEntity<>(gameService.getPlayerByName(name), HttpStatus.OK);
-
-    }
-    
-    @GetMapping("/getTopPlayerByName/{name}")
-    public ResponseEntity<List<Player>> getTopPlayerByName(@PathVariable String name) {
-        return new ResponseEntity<>(gameService.getTopPlayerByName(name), HttpStatus.OK);
-
-    }
-    
+    //Get top scores and Player details
     @GetMapping("/getTopPlayerByScore/{limit}")
     public ResponseEntity<List<Player>> getTopPlayerByScore(@PathVariable int limit) {
         return new ResponseEntity<>(gameService.findTopN(limit), HttpStatus.OK);
 
     }
-
-//    //added
-//    @GetMapping("/getTop5Players")
-//    public ResponseEntity<List<Player>> getTop5ByScore() {
-//        return new ResponseEntity<>(gameServiceImpl.getScore(), HttpStatus.OK);
-//
-//    }
     
+    //Delete player by Id
     @DeleteMapping("/deletePlayerById/{id}")
     public boolean deleteOrder(@PathVariable int id) {
         return gameService.deletePlayerById(id);
     }
-
-//    @GetMapping("/getTopScoreList")
-//    public List<Player> getTopScorer(){
-//        return gameServiceImpl.getScore();
-//    }
-//    
-//    @GetMapping("/getAllScoreList")
-//    public List<Player> getAllScorer(){
-//        return gameServiceImpl.getAllPlayers();
-//    }
-//
-//    @PostMapping("/storePlayerScore")
-//    public ResponseEntity<String> startGame(@RequestBody PlayerDetails playerDetails){
-//        String msg = "fail";
-//        if(Objects.nonNull(playerDetails)) {
-//            try {
-//                msg = gameServiceImpl.addGameScore(playerDetails.getName(),playerDetails.getPlayerScore());
-//            } catch (JsonProcessingException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        return new ResponseEntity(msg, HttpStatus.OK);
-//    }
+    
+    @GetMapping("/health")
+    public String healthCheck()
+    {
+    	return "Game Service is Working!!";
+    }
 
 }

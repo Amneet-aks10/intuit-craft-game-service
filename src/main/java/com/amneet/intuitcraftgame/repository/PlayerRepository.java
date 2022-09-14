@@ -9,14 +9,14 @@ import org.springframework.stereotype.Repository;
 
 import com.amneet.intuitcraftgame.model.Player;
 
+/**
+ * @author amneetkaursawhney
+ * Repository
+ */
 @Repository
 public interface PlayerRepository extends CrudRepository<Player, Integer> {
-
-
-	Player findByName(String name);
-
-	List<Player> findTop5ByName(String name);
 	
+	//To Find Top Scores & Player Details
 	@Query(value = "select * from player where score in (select distinct score from player order by score desc limit :limit) order by score desc", nativeQuery = true)
 	List<Player> findTopN(@Param("limit") int limit);
 

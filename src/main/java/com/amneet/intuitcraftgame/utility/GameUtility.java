@@ -10,6 +10,10 @@ import com.amneet.intuitcraftgame.model.Player;
 import com.amneet.intuitcraftgame.repository.PlayerRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+/**
+ * @author amneetkaursawhney
+ * Utility for DB communications
+ */
 @Component
 public class GameUtility {
 	
@@ -18,6 +22,7 @@ public class GameUtility {
 	
 	private int count = 0;
 
+	//add Player to DB
 	public String addGameScore(Player player){
 		
 		String msg = "Score entered for " + player.getName();
@@ -33,11 +38,13 @@ public class GameUtility {
 			
 	}
 
+	//Get Player Details by ID
 	public String getPlayerById(int id) {
 		
 		return playerRepository.findById(id).get().toString();
 	}
 
+	//Get List of All Players
 	public List<Player> getAllPlayers() {
 		
 		List<Player> playersList = new ArrayList<Player>();
@@ -46,40 +53,24 @@ public class GameUtility {
 		
 	}
 	
+	//Get Players by Top Scores
+	public List<Player> findTopN(int n) {
+		return playerRepository.findTopN(n);
+	}
+	
+	//Delete Player by Id
     public boolean deletePlayerById(int id) {
     	
     	playerRepository.deleteById(id);
         return getPlayerById(id) == null;
     }
 
-	public Player getPlayerByName(String name) {
-		
-		return playerRepository.findByName(name);
-		
-	}
-
-	public List<Player> getTopPlayerByName(String name) {
-		
-		return playerRepository.findTop5ByName(name);
-		
-	}
 	
-	
-	public List<Player> findTopN(int n) {
-		return playerRepository.findTopN(n);
-	}
-
-	
+    //Writing Data to File
 //	public void writeTheScoreToFile(String name, int score){
 //		
-////      Random rand = new Random();
-////      int rand_int1 = rand.nextInt(100);
-////      
-////      Player player = Player.builder()
-////              .id(count)
-////              .name(name)
-////              .score(score)
-////              .build();
+//      Random rand = new Random();
+//      int rand_int1 = rand.nextInt(100);
 //
 //		 count++;
 //	     Player player = new Player();

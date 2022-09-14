@@ -16,6 +16,10 @@ import com.amneet.intuitcraftgame.utility.FileReadUtility;
 import com.amneet.intuitcraftgame.utility.GameUtility;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+/**
+ * @author amneetkaursawhney
+ * Service Implementation
+ */
 @Service
 public class GameServiceImpl implements GameService{
 
@@ -50,6 +54,12 @@ public class GameServiceImpl implements GameService{
     	
     }
 	
+	//getTopScoresAndPlayers 
+	@Override
+	public List<Player> findTopN(int n) {
+		return gameUtility.findTopN(n);
+	}
+	
 	//deleteFromRepo
     @Override
     public boolean deletePlayerById(int id){
@@ -57,28 +67,6 @@ public class GameServiceImpl implements GameService{
     	return gameUtility.deletePlayerById(id);
     	
     }
-
-    //getPlayerByName
-	@Override
-	public Player getPlayerByName(String name) {
-		
-		return gameUtility.getPlayerByName(name);
-		
-	}
-
-	//getTopPlayersByName
-	@Override
-	public List<Player> getTopPlayerByName(String name) {
-		
-		return gameUtility.getTopPlayerByName(name);
-		
-	}
-	
-	//get top n 
-	@Override
-	public List<Player> findTopN(int n) {
-		return gameUtility.findTopN(n);
-	}
 
 
 }

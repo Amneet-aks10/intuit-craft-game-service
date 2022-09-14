@@ -9,6 +9,10 @@ import javax.persistence.Index;
 import javax.persistence.Table;
 
 
+/**
+ * @author amneetkaursawhney
+ * Player Entity 
+ */
 @Entity
 @Table(name = "player")
 public class Player {
